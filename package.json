@@ -1,0 +1,12 @@
+{
+  "name": "linkshortener",
+  "version": "0.1.0",
+  "description": "linkshortener",
+  "repository": "https://bitbucket.org/barnesconsulting/linkshortener",
+  "keywords": [
+    "url",
+    "shortener"
+  ],
+  "author": "T. Scott Barnes <barnes.t.scott@gmail.com>",
+  "license": "Other"
+}
