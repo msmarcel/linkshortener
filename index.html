@@ -1,11 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="LinkShortenerApp">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title>Link Shortener</title>
 </head>
 <body>
-
+    <form ng-controller="LinkShortenerCtrl">
+        <fieldset>
+            <legend>Link Shortener</legend>
+            <input type="url" ng-model="linkURL">
+            <button type="submit">Shorten Link</button>
+        </fieldset>
+        <fieldset>
+            <legend>Shortened Link</legend>
+            <output>{{linkURL}}</output>
+        </fieldset>
+    </form>
+    <script type="text/javascript" src="lib/jquery.js"></script>
+    <script type="text/javascript" src="lib/angular.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/controller.js"></script>
 </body>
 </html>
