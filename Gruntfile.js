@@ -12,6 +12,9 @@ module.exports = function(grunt) {
         files: [{
           src: ['less/core.less'],
           dest: 'WebContent/css/core.css'
+        }, {
+          src: ['less/bootstrap/yeti/yeti.less'],
+          dest: 'WebContent/css/bootstrap.css'
         }]
       }
     },
