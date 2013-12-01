@@ -11,35 +11,23 @@ module.exports = function(grunt) {
         },
         files: [{
           src: ['less/core.less'],
-          dest: 'WebContent/css/core.css'
+          dest: 'public/css/core.css'
         }, {
           src: ['less/bootstrap/yeti/yeti.less'],
-          dest: 'WebContent/css/bootstrap.css'
+          dest: 'public/css/bootstrap.css'
         }]
       }
     },
     copyto: {
       development: {
         files: [{
-          cwd: 'fonts',
-          src: ['**/*'],
-          dest: 'WebContent/fonts/'
-        }, {
-          cwd: 'img',
-          src: ['**/*'],
-          dest: 'WebContent/img/'
-        }, {
           cwd: 'js',
           src: ['**/*'],
-          dest: 'WebContent/js/'
+          dest: 'public/js/'
         }, {
           cwd: 'lib',
           src: ['**/*'],
-          dest: 'WebContent/lib/'
-        }, {
-          cwd: '.',
-          src: ['index.html'],
-          dest: 'WebContent/'
+          dest: 'public/lib/'
         }],
         options: {
           ignore: ['**/src{,/**/*}']
@@ -49,12 +37,12 @@ module.exports = function(grunt) {
     mkdir: {
       development: {
         options: {
-          create: ['WebContent', 'WebContent/css', 'WebContent/fonts', 'WebContent/img', 'WebContent/js']
+          create: ['public/css', 'public/js', 'public/lib']
         },
       },
     },
     clean: {
-      build: ['WebContent/']
+      build: ['public/css', 'public/js', 'public/lib']
     },
     watch: {
       css: {
@@ -66,7 +54,7 @@ module.exports = function(grunt) {
         tasks: ['copyto:development']
       },
       other: {
-        files: ['index.html', 'lib/**', 'img/**', 'fonts/**'],
+        files: ['lib/**'],
         tasks: ['copyto:development']
       }
     }

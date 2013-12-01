@@ -1,17 +1,16 @@
 {
-    "name": "barnesconsulting/linkshortener",
-    "description": "Link Shortener",
-    "authors": [
-        {
-            "name": "T. Scott Barnes",
-            "email": "barnes.t.scott@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.3.0",
-        "facebook/php-sdk": "3.2.*",
-        "google/apiclient": "dev-master",
-        "linkedinapi/linkedin": "1.0.*",
-        "j7mbo/twitter-api-php": "dev-master"
-    }
+	"name" : "barnesconsulting/linkshortener",
+	"description" : "Link Shortener",
+	"authors" : [{
+			"name" : "T. Scott Barnes",
+			"email" : "barnes.t.scott@gmail.com"
+		}
+	],
+	"require" : {
+		"php" : ">=5.3.0",
+		"zendframework/zendframework" : "~2.2",
+		"zendframework/zendservice-api" : "dev-master",
+		"zendframework/zendservice-twitter" : "~2.1",
+		"zendframework/zftool" : "dev-master"
+	}
 }

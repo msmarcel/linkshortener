@@ -2,6 +2,8 @@
 <buildpath>
 	<buildpathentry kind="src" path="vendor/facebook/php-sdk/src"/>
 	<buildpathentry kind="src" path="vendor/composer"/>
+	<buildpathentry kind="src" path="vendor/linkedinapi/linkedin"/>
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
 	<buildpathentry kind="src" path="vendor/google/apiclient/src"/>
+	<buildpathentry kind="src" path="vendor/j7mbo/twitter-api-php"/>
 </buildpath>
