@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <buildpath>
-	<buildpathentry kind="src" path="vendor/facebook/php-sdk/src"/>
 	<buildpathentry kind="src" path="vendor/composer"/>
-	<buildpathentry kind="src" path="vendor/linkedinapi/linkedin"/>
+	<buildpathentry kind="src" path="vendor/zendframework/zendservice-twitter/library"/>
+	<buildpathentry kind="src" path="vendor/zendframework/zftool/src"/>
+	<buildpathentry kind="src" path="vendor/zendframework/zendoauth/library"/>
+	<buildpathentry kind="src" path="module/Application/config"/>
+	<buildpathentry kind="src" path="module/Application/src"/>
+	<buildpathentry kind="src" path="module/Application/view"/>
+	<buildpathentry kind="src" path="vendor/zendframework/zendservice-api/library"/>
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
-	<buildpathentry kind="src" path="vendor/google/apiclient/src"/>
-	<buildpathentry kind="src" path="vendor/j7mbo/twitter-api-php"/>
+	<buildpathentry kind="src" path="vendor/zendframework/zendframework/library"/>
 </buildpath>

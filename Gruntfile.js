@@ -44,9 +44,32 @@ module.exports = function(grunt) {
     clean: {
       build: ['public/css', 'public/js', 'public/lib']
     },
+    php: {
+      development: {
+        options: {
+          port: 8000,
+          open: true,
+          base: "public/",
+          host: "localhost",
+          bin: "php",
+          router: "index.php",
+          keepalive: "true"
+        }
+      },
+      watch: {
+        options: {
+          port: 8000,
+          open: true,
+          base: "public/",
+          host: "localhost",
+          bin: "php",
+          router: "index.php"
+        }
+      }
+    },
     watch: {
       css: {
-        files: ['less/**'],
+        files: ['less/**', 'less/bootstrap/**', 'less/bootstrap/yeti/**'],
         tasks: ['less:development']
       },
       js: {
@@ -66,8 +89,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-php');
 
   // Default task.
-  grunt.registerTask('default', ['mkdir', 'less', 'copyto']);
+  grunt.registerTask('default', ['clean', 'mkdir', 'less', 'copyto']);
 
 };
