@@ -1,36 +1,31 @@
 <div class="col-md-8 col-md-offset-2">
-	<h1>Link Shortener</h1>
-	<form role="form" class="form-horizontal"
-		ng-controller="LinkShortenerCtrl" ng-submit="submit()">
-		<fieldset>
-			<label for="origURL" class="control-label">URL to shorten:</label>
-			<div class="input-group">
-				<input id="origURL" type="text" class="form-control"
-					ng-model="linkURL"> <span class="input-group-btn">
-					<button type="submit" class="btn btn-default">Shorten Link</button>
-				</span>
-			</div>
-			<span class="help-block">Enter a URL to generate shortened links</span>
-			<div class="well">
-				<input name="url_service" checked type="checkbox"> <label
-					for="url_service">Url Service #1</label> <input name="url_service"
-					type="checkbox"> <label for="url_service">Url Service #2</label> <input
-					name="url_service" type="checkbox"> <label for="url_service">Url
-					Service #3</label> <input name="url_service" type="checkbox"> <label
-					for="url_service">Url Service #4</label>
-			</div>
-		</fieldset>
-		<hr>
-		<fieldset ng-show="shortlinks.length"
-			class="row col-md-12 animate-show">
-			<legend>Shortened Links</legend>
-			<div ng-repeat="link in shortlinks" class="row col-md-12">
-				<label for="shortlink-{{ link.id }}" class="control-label col-md-3">{{
-					link.service }}</label>
-				<p id="shortlink-{{ link.id }}" class="form-control-static col-md-9">
-					<a href="{{ link.shorturl }}">{{ link.shorturl }}</a>
-				</p>
-			</div>
-		</fieldset>
-	</form>
+    <h1>Link Shortener</h1>
+    <form role="form" class="form-horizontal" ng-controller="LinkShortenerCtrl" ng-submit="submit()">
+        <fieldset>
+            <label for="origURL" class="control-label">URL to shorten:</label>
+            <div class="input-group">
+                <input id="origURL" type="text" class="form-control" ng-model="linkURL">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default">Shorten Link</button>
+                </span>
+            </div>
+            <span class="help-block">Enter a URL to generate shortened links</span>
+            <div ng-show="shortlinks.length" class="well animate-show">
+                <span ng-repeat="link in shortlinks" ng-hide="$index == 0">
+                    <input name="{{ link.id }}_enabled" ng-model="link.enabled" type="checkbox">
+                    <label for="{{ link.id }}_enabled">{{ link.service }}</label>
+                </span>
+            </div>
+        </fieldset>
+        <hr>
+        <fieldset ng-show="shortlinks.length" class="row col-md-12 animate-show">
+            <legend>Shortened Links</legend>
+            <div ng-repeat="link in shortlinks" class="row col-md-12" ng-class-odd="odd" ng-show="link.enabled">
+                <label for="shortlink-{{ link.id }}" class="control-label col-md-3">{{ link.service }}</label>
+                <p id="shortlink-{{ link.id }}" class="form-control-static col-md-9">
+                    <a href="{{ link.shorturl }}">{{ link.shorturl }}</a>
+                </p>
+            </div>
+        </fieldset>
+    </form>
 </div>
