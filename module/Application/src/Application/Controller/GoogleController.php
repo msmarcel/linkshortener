@@ -64,7 +64,7 @@ class GoogleController extends AbstractActionController
         );
         $needAuth = true;
         if ($this->session->accessToken) {
-            $requestHeaders['Authorization'] = $this->session->accessToken->getAccessToken();
+            $requestHeaders['Authorization'] = 'Bearer ' . $this->session->accessToken->getAccessToken();
             $needAuth = false;
         }
         $requestBody = json_encode(array(
