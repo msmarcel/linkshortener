@@ -23,28 +23,37 @@ function LinkShortenerCtrl($scope, $http) {
     }
   });
 
+  $scope.displayShortlinks = function() {
+    for(var loop = 0; loop < $scope.shortlinks.length; loop++) {
+      if($scope.shortlinks[loop].enabled && $scope.shortlinks[loop].shorturl) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   $scope.getLink = function(service) {
     if(service.enabled) {
-    if(!service.type) {
-      service.shorturl = $scope.linkURL;
-    } else if(service.type == 'jsonp') {
-      $http.jsonp(service.api + encodeURI($scope.linkURL)).success(function(data, status) {
-        if(data) {
-          service.shorturl = data.shorturl;
-        }
-      });
-    } else if(service.type == 'get') {
-      $http.get(service.api + encodeURI($scope.linkURL)).success(function(data, status) {
-        if(data) {
-          service.shorturl = data.shorturl;
-        }
-      });
-    }
+      if(!service.type) {
+        service.shorturl = $scope.linkURL;
+      } else if(service.type == 'jsonp') {
+        $http.jsonp(service.api + encodeURI($scope.linkURL)).success(function(data, status) {
+          if(data) {
+            service.shorturl = data.shorturl;
+          }
+        });
+      } else if(service.type == 'get') {
+        $http.get(service.api + encodeURI($scope.linkURL)).success(function(data, status) {
+          if(data) {
+            service.shorturl = data.shorturl;
+          }
+        });
+      }
     } else {
       service.shorturl = null;
     }
   };
-  
+
   $scope.submit = function() {
     for(var loop = 0; loop < $scope.shortlinks.length; loop++) {
       $scope.getLink($scope.shortlinks[loop]);
