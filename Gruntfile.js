@@ -13,7 +13,7 @@ module.exports = function(grunt) {
           src: ['less/core.less'],
           dest: 'public/css/core.css'
         }, {
-          src: ['less/bootstrap/yeti/yeti.less'],
+          src: ['less/bootstrap/bootstrap.less'],
           dest: 'public/css/bootstrap.css'
         }]
       }
