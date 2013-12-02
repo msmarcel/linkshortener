@@ -24,6 +24,7 @@ function LinkShortenerCtrl($scope, $http) {
   });
 
   $scope.getLink = function(service) {
+    if(service.enabled) {
     if(!service.type) {
       service.shorturl = $scope.linkURL;
     } else if(service.type == 'jsonp') {
@@ -38,6 +39,9 @@ function LinkShortenerCtrl($scope, $http) {
           service.shorturl = data.shorturl;
         }
       });
+    }
+    } else {
+      service.shorturl = null;
     }
   };
   

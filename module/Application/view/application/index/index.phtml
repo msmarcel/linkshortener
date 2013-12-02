@@ -20,7 +20,7 @@
         <hr>
         <fieldset ng-show="shortlinks.length" class="row col-md-12 animate-show">
             <legend>Shortened Links</legend>
-            <div ng-repeat="link in shortlinks" class="row col-md-12" ng-class-odd="odd" ng-show="link.enabled">
+            <div ng-repeat="link in shortlinks" class="row col-md-12" ng-class-odd="odd" ng-show="link.shorturl">
                 <label for="shortlink-{{ link.id }}" class="control-label col-md-3">{{ link.service }}</label>
                 <p id="shortlink-{{ link.id }}" class="form-control-static col-md-9">
                     <a href="{{ link.shorturl }}">{{ link.shorturl }}</a>
