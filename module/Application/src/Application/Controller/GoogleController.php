@@ -58,18 +58,15 @@ class GoogleController extends AbstractActionController
     {
         $this->init();
         
-        if (! $this->session->accessToken) {
-            return new JsonModel(array(
-                'success' => false,
-                'reason' => 'needauth'
-            ));
-        }
-        
         $url = $this->params()->fromQuery('url');
         $requestHeaders = array(
-            // 'Authorization' => $this->session->accessToken->getAccessToken(),
             'Content-Type' => 'application/json'
         );
+        $needAuth = true;
+        if ($this->session->accessToken) {
+            $requestHeaders['Authorization'] = $this->session->accessToken->getAccessToken();
+            $needAuth = false;
+        }
         $requestBody = json_encode(array(
             'key' => 'AIzaSyD8UTiWwLri3M3xUkmNP6bUoTmv23ElWY8',
             'longUrl' => $url
@@ -82,6 +79,7 @@ class GoogleController extends AbstractActionController
         if (array_key_exists('id', $data)) {
             return new JsonModel(array_merge(array(
                 'success' => true,
+                'needauth' => $needAuth,
                 'origurl' => $url,
                 'shorturl' => $data['id']
             ), $data));
@@ -89,6 +87,7 @@ class GoogleController extends AbstractActionController
         
         return new JsonModel(array_merge(array(
             'success' => false,
+            'needauth' => $needAuth,
             'origurl' => $url
         ), $data));
     }
