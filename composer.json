@@ -11,6 +11,7 @@
 		"zendframework/zendframework" : "~2.2",
 		"zendframework/zendservice-api" : "dev-master",
 		"zendframework/zendservice-twitter" : "~2.1",
-		"zendframework/zftool" : "dev-master"
+		"zendframework/zftool" : "dev-master",
+		"jvandemo/zendservice-oauth2" : "dev-master"
 	}
 }
