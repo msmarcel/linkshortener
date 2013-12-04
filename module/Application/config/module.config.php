@@ -63,6 +63,40 @@ return array(
                     )
                 )
             ),
+            'bitly' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/bitly[/]',
+                    'defaults' => array(
+                        'controller' => 'bitly',
+                        'action' => 'index'
+                    )
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'auth' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'auth[/]',
+                            'defaults' => array(
+                                'action' => 'auth'
+                            )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'complete' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'complete',
+                                    'defaults' => array(
+                                        'action' => 'complete'
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -115,7 +149,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'index' => 'Application\Controller\IndexController',
-            'google' => 'Application\Controller\GoogleController'
+            'google' => 'Application\Controller\GoogleController',
+            'bitly' => 'Application\Controller\BitlyController'
         )
     ),
     'view_manager' => array(

@@ -13,10 +13,10 @@ use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
 use Zend\Session\Container;
 use ZendService\Api\Api;
-use ZendService\Oauth2\Client\Client as OAuth2Client;
+use Application\OAuth\Client as OAuth2Client;
 use Application\OAuth\HttpClient;
 
-class GoogleController extends AbstractActionController
+class BitlyController extends AbstractActionController
 {
 
     protected $client;
@@ -30,16 +30,15 @@ class GoogleController extends AbstractActionController
         } elseif ($uri->getScheme() == 'https' && $uri->getPort() != 443) {
             $baseUri .= ':' . $uri->getPort();
         }
-        $this->authLink = $baseUri . $this->url()->fromRoute('google/auth');
-        $redirectUri = $baseUri . $this->url()->fromRoute('google/auth/complete');
+        $this->authUri = $baseUri . $this->url()->fromRoute('bitly/auth');
+        $redirectUri = $baseUri . $this->url()->fromRoute('bitly/auth/complete');
         
         $this->client = new OAuth2Client(array(
             'client' => array(
-                'client_id' => '116155492975-jiimc1pnbn8rutaif71tb9bf0udj7qn0.apps.googleusercontent.com',
-                'client_secret' => '8LcgdVHWFdP--sQNFdcVqT1E',
-                'scope' => 'https://www.googleapis.com/auth/urlshortener',
-                'authorization_url' => 'https://accounts.google.com/o/oauth2/auth',
-                'access_token_url' => 'https://accounts.google.com/o/oauth2/token',
+                'client_id' => 'b4ae6ba623cf7409f817389d9b619ba73dba379a',
+                'client_secret' => 'c84e8ace2b37b55cd0e93763fb773c4dbcd3ff4d',
+                'authorization_url' => 'https://bitly.com/oauth/authorize',
+                'access_token_url' => 'https://api-ssl.bitly.com/oauth/access_token',
                 'redirect_uri' => $redirectUri
             )
         ));
@@ -52,7 +51,7 @@ class GoogleController extends AbstractActionController
             )
         )));
         
-        $this->session = new Container('google');
+        $this->session = new Container('bitly');
     }
 
     public function indexAction()
@@ -60,39 +59,38 @@ class GoogleController extends AbstractActionController
         $this->init();
         
         $url = $this->params()->fromQuery('url');
-        $requestHeaders = array(
-            'Content-Type' => 'application/json'
-        );
-        $needAuth = true;
-        if ($this->session->accessToken) {
-            $requestHeaders['Authorization'] = 'Bearer ' . $this->session->accessToken->getAccessToken();
-            $needAuth = false;
+        if (isset($this->session->accessToken)) {
+            $requestParams = array(
+                'access_token' => $this->session->accessToken->getAccessToken(),
+                'longUrl' => $url
+            );
+            
+            $response = $this->client->get('https://api-ssl.bitly.com/v3/shorten', $requestParams);
+            $data = json_decode($response->getBody(), true);
+            
+            if (array_key_exists('url', $data['data'])) {
+                return new JsonModel(array_merge(array(
+                    'success' => true,
+                    'needauth' => false,
+                    'origurl' => $url,
+                    'shorturl' => $data['data']['url']
+                ), $data));
+            } else {
+                return new JsonModel(array_merge(array(
+                	'success' => false,
+                    'needauth' => false,
+                    'origurl' => $url,
+                    'shorturl' => $data['status_txt']
+                ), $data));
+            }
         }
-        $requestBody = json_encode(array(
-            'key' => 'AIzaSyD8UTiWwLri3M3xUkmNP6bUoTmv23ElWY8',
-            'longUrl' => $url
-        ));
         
-        $response = $this->client->post('https://www.googleapis.com/urlshortener/v1/url', null, $requestHeaders, $requestBody);
-        
-        $data = json_decode($response->getBody(), true);
-        
-        if (array_key_exists('id', $data)) {
-            return new JsonModel(array_merge(array(
-                'success' => true,
-                'needauth' => $needAuth,
-                'authlink' => $this->authLink,
-                'origurl' => $url,
-                'shorturl' => $data['id']
-            ), $data));
-        }
-        
-        return new JsonModel(array_merge(array(
+        return new JsonModel(array(
             'success' => false,
-            'needauth' => $needAuth,
-            'authlink' => $this->authLink,
+            'needauth' => true,
+            'authlink' => $this->authUri,
             'origurl' => $url
-        ), $data));
+        ));
     }
 
     public function authAction()

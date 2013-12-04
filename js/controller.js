@@ -8,6 +8,7 @@ function LinkShortenerCtrl($scope, $http) {
     'service': 'Original URL',
     'type': null,
     'api': null,
+    'success': true,
     'shorturl': null
   }, {
     'id': 'isgd',
@@ -15,6 +16,7 @@ function LinkShortenerCtrl($scope, $http) {
     'service': 'is.gd',
     'type': 'jsonp',
     'api': 'http://is.gd/create.php?format=json&callback=JSON_CALLBACK&url=',
+    'success': true,
     'shorturl': null
   }];
   $http.get('/services.json').success(function(data, status) {
@@ -39,13 +41,20 @@ function LinkShortenerCtrl($scope, $http) {
       } else if(service.type == 'jsonp') {
         $http.jsonp(service.api + encodeURI($scope.linkURL)).success(function(data, status) {
           if(data) {
+            service.success = true;
             service.shorturl = data.shorturl;
           }
         });
       } else if(service.type == 'get') {
         $http.get(service.api + encodeURI($scope.linkURL)).success(function(data, status) {
           if(data) {
+            service.success = data.success;
             service.shorturl = data.shorturl;
+            if(data.needauth && data.authlink) {
+              service.authlink = data.authlink;
+            } else {
+              service.authlink = null;
+            }
           }
         });
       }

@@ -20,10 +20,14 @@
         <hr>
         <fieldset ng-show="displayShortlinks()" class="row col-md-12 animate-show">
             <legend>Shortened Links</legend>
-            <div ng-repeat="link in shortlinks" class="row col-md-12" ng-class-odd="odd" ng-show="link.shorturl">
+            <div ng-repeat="link in shortlinks" class="row col-md-12" ng-class-odd="odd" ng-show="link.shorturl || link.authlink">
                 <label for="shortlink-{{ link.id }}" class="control-label col-md-3">{{ link.service }}</label>
-                <p id="shortlink-{{ link.id }}" class="form-control-static col-md-9">
-                    <a href="{{ link.shorturl }}">{{ link.shorturl }}</a>
+                <p id="shortlink-{{ link.id }}" class="form-control-static col-md-7">
+                    <a ng-show="link.success" href="{{ link.shorturl }}">{{ link.shorturl }}</a>
+                    <span ng-hide="link.success">{{ link.shorturl }}</span>
+                </p>
+                <p id="authlink-{{ link.id }}" class="form-control-static col-md-2" ng-show="link.authlink">
+                    <a href="{{ link.authlink }}" class="btn btn-default">Login</a>
                 </p>
             </div>
         </fieldset>

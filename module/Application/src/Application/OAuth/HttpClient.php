@@ -128,6 +128,10 @@ class HttpClient implements ClientInterface
         if (! isset($headers['Content-Type'])) {
             $headers['Content-Type'] = ZendHttpClient::ENC_URLENCODED;
         }
+
+        if (! isset($headers['Accept'])) {
+            $headers['Accept'] = 'application/json';
+        }
         
         if (! empty($headers) && is_array($headers)) {
             $request->getHeaders()->addHeaders($headers);
