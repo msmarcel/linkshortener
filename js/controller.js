@@ -2,6 +2,7 @@
 
 function LinkShortenerCtrl($scope, $http) {
   $scope.linkURL = '';
+  $scope.linkImage = "http://placekitten.com/g/320/240";
   $scope.shortlinks = [{
     'id': 'default',
     'enabled': true,
@@ -9,7 +10,10 @@ function LinkShortenerCtrl($scope, $http) {
     'type': null,
     'api': null,
     'success': true,
-    'shorturl': null
+    'shorturl': null,
+    'showdescription': false,
+    'showtitle': false,
+    'showimage': false
   }, {
     'id': 'isgd',
     'enabled': true,
@@ -17,7 +21,10 @@ function LinkShortenerCtrl($scope, $http) {
     'type': 'jsonp',
     'api': 'http://is.gd/create.php?format=json&callback=JSON_CALLBACK&url=',
     'success': true,
-    'shorturl': null
+    'shorturl': null,
+    'showdescription': false,
+    'showtitle': false,
+    'showimage': false
   }, {
     'id': 'facebook',
     'enabled': true,
@@ -25,7 +32,10 @@ function LinkShortenerCtrl($scope, $http) {
     'type': 'fbapi',
     'api': null,
     'success': true,
-    'shorturl': null
+    'shorturl': null,
+    'showdescription': true,
+    'showtitle': true,
+    'showimage': true
   }, {
     'id': 'linkedin',
     'enabled': true,
@@ -44,6 +54,15 @@ function LinkShortenerCtrl($scope, $http) {
   $scope.displayShortlinks = function() {
     for(var loop = 0; loop < $scope.shortlinks.length; loop++) {
       if($scope.shortlinks[loop].enabled && $scope.shortlinks[loop].shorturl) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  $scope.displayDetails = function(check) {
+    for(var loop = 0; loop < $scope.shortlinks.length; loop++) {
+      if($scope.shortlinks[loop].enabled && $scope.shortlinks[loop][check]) {
         return true;
       }
     }
@@ -76,7 +95,7 @@ function LinkShortenerCtrl($scope, $http) {
       } else if(service.type == 'fbapi') {
         FB.getLoginStatus(function(response) {
           if(response.status == 'connected') {
-            //FB.api();
+            // FB.api();
           } else if(response.status == 'not_authorized') {
             service.authlink = 'javascript:FB.login();';
           }
