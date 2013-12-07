@@ -73,11 +73,7 @@ module.exports = function(grunt) {
         tasks: ['less:development']
       },
       js: {
-        files: ['js/**'],
-        tasks: ['copyto:development']
-      },
-      other: {
-        files: ['lib/**'],
+        files: ['js/**', 'lib/**'],
         tasks: ['copyto:development']
       }
     }
@@ -93,5 +89,6 @@ module.exports = function(grunt) {
 
   // Default task.
   grunt.registerTask('default', ['clean', 'mkdir', 'less', 'copyto']);
+  grunt.registerTask('phpwatch', ['php:watch', 'watch']);
 
 };

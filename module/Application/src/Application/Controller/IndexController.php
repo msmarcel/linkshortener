@@ -26,7 +26,7 @@ class IndexController extends AbstractActionController
             array(
                 'id' => 'google',
                 'enabled' => true,
-                'service' => 'Google URL Shortener (goo.gl)',
+                'service' => 'Google (goo.gl)',
                 'type' => 'get',
                 'api' => $this->url()->fromRoute('google') . '?url=',
                 'success' => true,
@@ -35,7 +35,7 @@ class IndexController extends AbstractActionController
             array(
                 'id' => 'bitly',
                 'enabled' => true,
-                'service' => 'Bitly',
+                'service' => 'Bitly (bit.ly)',
                 'type' => 'get',
                 'api' => $this->url()->fromRoute('bitly') . '?url=',
                 'success' => true,

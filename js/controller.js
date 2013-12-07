@@ -18,6 +18,14 @@ function LinkShortenerCtrl($scope, $http) {
     'api': 'http://is.gd/create.php?format=json&callback=JSON_CALLBACK&url=',
     'success': true,
     'shorturl': null
+  }, {
+    'id': 'facebook',
+    'enabled': true,
+    'service': 'Facebook',
+    'type': 'fbapi',
+    'api': null,
+    'success': true,
+    'shorturl': null
   }];
   $http.get('/services.json').success(function(data, status) {
     for(var loop = 0; loop < data.length; loop++) {
@@ -55,6 +63,14 @@ function LinkShortenerCtrl($scope, $http) {
             } else {
               service.authlink = null;
             }
+          }
+        });
+      } else if(service.type == 'fbapi') {
+        FB.getLoginStatus(function(response) {
+          if(response.status == 'connected') {
+            //FB.api();
+          } else if(response.status == 'not_authorized') {
+            service.authlink = 'javascript:FB.login();';
           }
         });
       }

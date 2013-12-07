@@ -9,12 +9,18 @@
                     <button type="submit" class="btn btn-default">Shorten Link</button>
                 </span>
             </div>
-            <span class="help-block">Enter a URL to generate shortened links</span>
-            <div ng-show="shortlinks.length" class="well animate-show">
-                <span ng-repeat="link in shortlinks" ng-hide="$index == 0">
+            <div class="help-block">Enter a URL to generate shortened links</div>
+            <div ng-show="shortlinks.length" class="well row animate-show">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="link in shortlinks" ng-hide="$index == 0">
                     <input name="{{ link.id }}_enabled" ng-model="link.enabled" type="checkbox">
                     <label for="{{ link.id }}_enabled">{{ link.service }}</label>
-                </span>
+                </div>
+            </div>
+            <div ng-show="displayDetails()" class="row col-md-12 animate-show">
+                <div class="input-group">
+                    <label for="description" class="control-label">Description:</label>
+                    <textarea id="description" class="form-control" ng-model="linkDesc"></textarea>
+                </div>
             </div>
         </fieldset>
         <hr>
