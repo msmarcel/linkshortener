@@ -3,16 +3,16 @@
 <html lang="en" ng-app="LinkShortenerApp">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle('Link Shortener')->setSeparator(' - ')->setAutoEscape(false); ?>
 
         <?php echo $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
-            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge');
         ?>
 
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
                         ->prependStylesheet($this->basePath() . '/css/bootstrap.css')
-                        ->prependStylesheet($this->basePath() . '/css/core.css') ?>
+                        ->prependStylesheet($this->basePath() . '/css/core.css'); ?>
         <script type="text/javascript" src="http://platform.linkedin.com/in.js">
             api_key: 75rsw6wrww3h5k
         </script>
@@ -21,7 +21,7 @@
         <div class="container">
             <?php echo $this->content; ?>
         </div>
-        <?php echo $this->inlineScript() ?>
+        <?php echo $this->inlineScript(); ?>
         <!-- Scripts -->
         <?php echo $this->headScript()
             ->appendFile($this->basePath() . '/lib/jquery.js')
@@ -29,7 +29,7 @@
             ->appendFile($this->basePath() . '/lib/angular.js')
             ->appendFile($this->basePath() . '/js/app.js')
             ->appendFile($this->basePath() . '/js/controller.js')
-            ->appendFile($this->basePath() . '/js/index.js')
+            ->appendFile($this->basePath() . '/js/index.js');
         ; ?>
     </body>
 </html>
