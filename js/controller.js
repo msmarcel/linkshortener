@@ -26,6 +26,14 @@ function LinkShortenerCtrl($scope, $http) {
     'api': null,
     'success': true,
     'shorturl': null
+  }, {
+    'id': 'linkedin',
+    'enabled': true,
+    'service': 'LinkedIn',
+    'type': 'liapi',
+    'api': null,
+    'success': true,
+    'shorturl': null
   }];
   $http.get('/services.json').success(function(data, status) {
     for(var loop = 0; loop < data.length; loop++) {
