@@ -43,7 +43,10 @@ function LinkShortenerCtrl($scope, $http) {
     'type': 'liapi',
     'api': null,
     'success': true,
-    'shorturl': null
+    'shorturl': null,
+    'showdescription': true,
+    'showtitle': true,
+    'showimage': false
   }];
   $http.get('/services.json').success(function(data, status) {
     for(var loop = 0; loop < data.length; loop++) {
