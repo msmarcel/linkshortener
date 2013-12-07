@@ -8,7 +8,7 @@
 					ng-repeat="link in shortlinks" ng-hide="$index == 0">
 					<input name="{{ link.id }}_enabled" ng-model="link.enabled"
 						type="checkbox"> <label for="{{ link.id }}_enabled">{{
-						link.service }}</label>
+						link.service }}</label> <span ng-class="link.serviceicon"></span>
 				</div>
 			</div>
 			<label for="origURL" class="control-label">URL to shorten:</label>

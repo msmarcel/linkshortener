@@ -13,7 +13,8 @@ function LinkShortenerCtrl($scope, $http) {
     'shorturl': null,
     'showdescription': false,
     'showtitle': false,
-    'showimage': false
+    'showimage': false,
+    'serviceicon' : null
   }, {
     'id': 'isgd',
     'enabled': true,
@@ -24,7 +25,8 @@ function LinkShortenerCtrl($scope, $http) {
     'shorturl': null,
     'showdescription': false,
     'showtitle': false,
-    'showimage': false
+    'showimage': false,
+    'serviceicon' : null
   }, {
     'id': 'facebook',
     'enabled': true,
@@ -35,7 +37,8 @@ function LinkShortenerCtrl($scope, $http) {
     'shorturl': null,
     'showdescription': true,
     'showtitle': true,
-    'showimage': true
+    'showimage': true,
+    'serviceicon' : "brandico-facebook-rect"
   }, {
     'id': 'linkedin',
     'enabled': true,
@@ -46,7 +49,8 @@ function LinkShortenerCtrl($scope, $http) {
     'shorturl': null,
     'showdescription': true,
     'showtitle': true,
-    'showimage': false
+    'showimage': false,
+    'serviceicon': "brandico-linkedin-rect"
   }];
   $http.get('/services.json').success(function(data, status) {
     for(var loop = 0; loop < data.length; loop++) {

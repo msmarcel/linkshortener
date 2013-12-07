@@ -33,7 +33,8 @@ class IndexController extends AbstractActionController
 						'shortlink' => null,
 						'showdescription' => false,
 						'showtitle' => false,
-						'showimage' => false
+						'showimage' => false,
+						'serviceicon' => "brandico-googleplus-rect"
 				),
 				array(
 						'id' => 'bitly',
@@ -45,7 +46,8 @@ class IndexController extends AbstractActionController
 						'shortlink' => null,
 						'showdescription' => false,
 						'showtitle' => false,
-						'showimage' => false
+						'showimage' => false,
+						'serviceicon' => ["glyphicon","glyphicon-user"]
 				)
 		));
 	}
