@@ -18,9 +18,29 @@
 }
 
 .shortlinks-select {
-	.loggedout {
+	&.loggedout .service-icon {
 		cursor: pointer;
-		color: #777;
+		color: #ccc;
+	}
+	
+	&.loggedin .service-icon {
+		cursor: pointer;
+		color: #ace500;
+		&.facebook{
+			color: #4c65a4;
+		}
+		&.linkedin{
+			color: #1783bc;
+		}
+		&.google{
+			color: #dd4b39;
+		}
+		&.bitly{
+			color: #fac96f;
+		}
+		&.twitter{
+			color: #2daae1;
+		}
 	}
 
 	span.service-icon {
