@@ -22,7 +22,8 @@
 				</span>
 			</div>
 			<div class="help-block">Enter a URL to generate shortened links</div>
-			<div class="minimized-details" ng-click="hideDetails = !hideDetails">
+			<div class="minimized-details" ng-click="hideDetails = !hideDetails"
+				ng-show="displayDetails('showtitle')||displayDetails('showdescription')||displayDetails('showimage')">
 				<span class="glyphicon glyphicon-collapse-down"
 					ng-hide="hideDetails"></span><span
 					class="glyphicon glyphicon-expand" ng-show="hideDetails"></span> <strong>Details</strong>
