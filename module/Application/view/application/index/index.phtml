@@ -1,7 +1,8 @@
 <div class="col-md-8 col-md-offset-2">
 	<h1>Link Shortener</h1>
 	<form role="form" class="form-horizontal"
-		ng-controller="LinkShortenerCtrl" ng-submit="submit()">
+		ng-controller="LinkShortenerCtrl"
+		ng-submit="hideDetails = true; submit();">
 		<fieldset>
 			<div ng-show="shortlinks.length" class="well row animate-show">
 				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 shortlinks-select"
@@ -15,13 +16,19 @@
 			<label for="origURL" class="control-label">URL to shorten:</label>
 			<div class="input-group">
 				<input id="origURL" type="text" class="form-control"
-					ng-model="linkURL"> <span class="input-group-btn">
+					ng-model="linkURL" ng-change="hideDetails = false"> <span
+					class="input-group-btn">
 					<button type="submit" class="btn btn-default">Shorten Link</button>
 				</span>
 			</div>
 			<div class="help-block">Enter a URL to generate shortened links</div>
-
-			<div class="row">
+			<div class="minimized-details" ng-click="hideDetails = !hideDetails">
+				<span class="glyphicon glyphicon-collapse-down"
+					ng-hide="hideDetails"></span><span
+					class="glyphicon glyphicon-expand" ng-show="hideDetails"></span> <strong>Details</strong>
+			</div>
+			<div class="row" ng-hide="hideDetails"
+				class="animate-hide animate-show">
 				<div class="col-md-6">
 					<div ng-show="displayDetails('showtitle')"
 						class="col-md-12 animate-show form-group">
@@ -39,7 +46,8 @@
 					<div ng-show="displayDetails('showimage')"
 						class="col-md-12 animate-show form-group">
 						<label for="image" class="control-label">Image:</label> <input
-							id="image" class="form-control" ng-model="linkImage" type="url">
+							id="image" class="form-control" ng-model="linkImage" type="url"
+							placeholder="http://placekitten.com/g/320/240">
 					</div>
 					<div ng-show="displayDetails('showimage')"
 						class="col-md-12 animate-show form-group">

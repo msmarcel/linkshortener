@@ -2,7 +2,7 @@
 
 function LinkShortenerCtrl($scope, $http) {
   $scope.linkURL = '';
-  $scope.linkImage = "http://placekitten.com/g/320/240";
+  $scope.linkImage = "";
   $scope.shortlinks = [{
     'id': 'default',
     'enabled': true,

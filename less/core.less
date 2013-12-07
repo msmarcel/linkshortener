@@ -1,19 +1,20 @@
 @import url(http://weloveiconfonts.com/api/?family=brandico);
-
-/* brandico */
-[class*="brandico-"]:before {
-  font-family: 'brandico', sans-serif;
+[class *= "brandico-"]:before {
+	font-family: 'brandico', sans-serif;
 }
 
-.animate-show {
+.animate-show , .animate-hide {
 	-webkit-transition: all linear 0.5s;
 	transition: all linear 0.5s;
 	line-height: 20px;
 	opacity: 1;
+	&.ng-hide-add, &.ng-hide-remove {
+		display: block ! important;
+	}
 }
 
 .inline {
-    display: inline-block;
+	display: inline-block;
 }
 
 .shortlinks-select {
@@ -21,7 +22,9 @@
 		cursor: pointer;
 		color: #777;
 	}
+
 	span.service-icon {
 		cursor: pointer;
 	}
 }
+
