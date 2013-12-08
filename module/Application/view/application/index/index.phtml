@@ -11,7 +11,8 @@
 					<input id="{{ link.id }}_enabled" name="{{ link.id }}_enabled"
 						ng-model="link.enabled" type="checkbox"> <label
 						for="{{ link.id }}_enabled">{{ link.service }}</label> <span
-						ng-class="link.serviceicon" class="service-icon {{ link.id }}"></span>
+						ng-class="link.serviceicon" class="service-icon {{ link.id }}"
+						ng-click="(checkLogin(link.id)=='loggedout')?login(link.id):logout(link.id)"></span>
 				</div>
 			</div>
 			<label for="origURL" class="control-label">URL to shorten:</label>
@@ -61,8 +62,9 @@
 		<fieldset ng-show="displayShortlinks()"
 			class="row col-md-12 animate-show">
 			<legend>Shortened Links</legend>
-			<div ng-repeat="link in shortlinks" class="row col-md-12 animate-show"
-				ng-class-odd="odd" ng-show="link.shorturl || link.authlink">
+			<div ng-repeat="link in shortlinks"
+				class="row col-md-12 animate-show" ng-class-odd="odd"
+				ng-show="link.shorturl || link.authlink">
 				<label for="shortlink-{{ link.id }}" class="control-label col-md-3">{{
 					link.service }}</label>
 				<p id="shortlink-{{ link.id }}" class="form-control-static col-md-9">
