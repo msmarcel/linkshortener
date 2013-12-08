@@ -4,25 +4,32 @@
 }
 
 .animate-show {
-	&.ng-hide-add, &.ng-hide-remove {
-		-webkit-transition: all linear 0.5s;
-		-moz-transition: all linear 0.5s;
-		-o-transition: all linear 0.5s;
-		transition: all linear 0.5s;
+	overflow: hidden ! important;
+	
+	&.ng-hide-add , &.ng-hide-remove {
+		-webkit-transition: all 0.5s ease-in-out;
+		-moz-transition: all 0.5s ease-in-out;
+		-o-transition: all 0.5s ease-in-out;
+		transition: all 0.5s ease-in-out;
 		display: block ! important;
+		height: 0px;
 	}
 
 	&.ng-hide-remove {
-		opacity:0;
+		opacity: 0;
+		height: 0px;
 		&.ng-hide-remove-active {
 			opacity: 1;
+			height: 400px;
 		}
 	}
 
 	&.ng-hide-add {
 		opacity: 1;
+		height: 400px;
 		&.ng-hide-add-active {
-			opacity:0;
+			opacity: 0;
+			height: 0px;
 		}
 	}
 }
