@@ -53,7 +53,7 @@ return array(
                             'check' => array(
                                 'type' => 'Segment',
                                 'options' => array(
-                                    'route' => 'complete',
+                                    'route' => 'check',
                                     'defaults' => array(
                                         'action' => 'auth-check'
                                     )
@@ -71,7 +71,7 @@ return array(
                             'logout' => array(
                                 'type' => 'Segment',
                                 'options' => array(
-                                    'route' => 'complete',
+                                    'route' => 'logout',
                                     'defaults' => array(
                                         'action' => 'logout'
                                     )
@@ -105,7 +105,7 @@ return array(
                             'check' => array(
                                 'type' => 'Segment',
                                 'options' => array(
-                                    'route' => 'complete',
+                                    'route' => 'check',
                                     'defaults' => array(
                                         'action' => 'auth-check'
                                     )
@@ -123,7 +123,7 @@ return array(
                             'logout' => array(
                                 'type' => 'Segment',
                                 'options' => array(
-                                    'route' => 'complete',
+                                    'route' => 'logout',
                                     'defaults' => array(
                                         'action' => 'logout'
                                     )

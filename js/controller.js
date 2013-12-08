@@ -94,7 +94,7 @@ function LinkShortenerCtrl($scope, $http) {
       }
     } else if(service.type == 'get') {
       if(!service.authstatus) {
-        $http.get(service.authlink + '/check').success(function(data, status) {
+        $http.get(service.authlink + 'check').success(function(data, status) {
           if(data) {
             service.authstatus = data.status;
             updateViewExternal();
