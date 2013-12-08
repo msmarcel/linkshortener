@@ -82,6 +82,9 @@ function LinkShortenerCtrl($scope, $http) {
 
   $scope.checkLogin = function(id) {
     if(id == 'linkedin') {
+      if(!IN.User) {
+        return 'loggedout';
+      }
       if(IN.User.isAuthorized()) {
         return 'loggedin';
       }
