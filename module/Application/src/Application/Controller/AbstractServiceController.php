@@ -104,8 +104,10 @@ abstract class AbstractServiceController extends AbstractActionController
 
     public function authCheckAction()
     {
+        $this->init();
+        
         return new JsonModel(array(
-            'status' => ($this->session->accessToken ? 'loggedin' : 'loggedout')
+            'status' => (isset($this->session->accessToken) ? 'loggedin' : 'loggedout')
         ));
     }
 

@@ -129,7 +129,7 @@ function LinkShortenerCtrl($scope, $http) {
     } else if(service.type == 'fbapi') {
       FB.logout();
     } else if(service.type == 'get') {
-      window.location = service.authlink + '/logout';
+      window.location = service.authlink + 'logout';
     }
   };
 
