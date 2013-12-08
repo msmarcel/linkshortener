@@ -91,6 +91,24 @@ function LinkShortenerCtrl($scope, $http) {
     }
     return 'loggedout';
   };
+
+  $scope.login = function(id) {
+    if(id == 'linkedin') {
+      if(!IN.User) {
+        return;
+      }
+      IN.User.authorize(updateViewExternal);
+    }
+  };
+
+  $scope.logout = function(id) {
+    if(id == 'linkedin') {
+      if(!IN.User) {
+        return;
+      }
+      IN.User.logout(updateViewExternal);
+    }
+  };
   
   $scope.getLink = function(service) {
     if(service.enabled) {
