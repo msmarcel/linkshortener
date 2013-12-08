@@ -34,6 +34,7 @@ class IndexController extends AbstractActionController
 						'showdescription' => false,
 						'showtitle' => false,
 						'showimage' => false,
+				        'auth' => 'allowed',
 						'serviceicon' => "brandico-googleplus-rect"
 				),
 				array(
@@ -47,6 +48,7 @@ class IndexController extends AbstractActionController
 						'showdescription' => false,
 						'showtitle' => false,
 						'showimage' => false,
+				        'auth' => 'required',
 						'serviceicon' => ["glyphicon","glyphicon-user"]
 				)
 		));

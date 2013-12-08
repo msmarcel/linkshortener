@@ -14,6 +14,7 @@ function LinkShortenerCtrl($scope, $http) {
     'showdescription': false,
     'showtitle': false,
     'showimage': false,
+    'auth': 'none',
     'serviceicon' : null
   }, {
     'id': 'isgd',
@@ -26,6 +27,7 @@ function LinkShortenerCtrl($scope, $http) {
     'showdescription': false,
     'showtitle': false,
     'showimage': false,
+    'auth': 'none',
     'serviceicon' : null
   }, {
     'id': 'facebook',
@@ -38,6 +40,7 @@ function LinkShortenerCtrl($scope, $http) {
     'showdescription': true,
     'showtitle': true,
     'showimage': true,
+    'auth': 'required',
     'serviceicon' : "brandico-facebook-rect"
   }, {
     'id': 'linkedin',
@@ -50,6 +53,7 @@ function LinkShortenerCtrl($scope, $http) {
     'showdescription': true,
     'showtitle': true,
     'showimage': false,
+    'auth': 'required',
     'serviceicon': "brandico-linkedin-rect"
   }];
   $http.get('/services.json').success(function(data, status) {
@@ -76,6 +80,13 @@ function LinkShortenerCtrl($scope, $http) {
     return false;
   };
 
+  $scope.checkLogin = function(id) {
+    if(id == 'linkedin') {
+      return IN.User.isAuthorized();
+    }
+    return false;
+  };
+  
   $scope.getLink = function(service) {
     if(service.enabled) {
       if(!service.type) {
