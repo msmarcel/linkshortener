@@ -4,10 +4,10 @@
 		ng-controller="LinkShortenerCtrl"
 		ng-submit="hideDetails = true; submit();">
 		<fieldset>
-			<div ng-show="shortlinks.length" class="well row animate-show">
+			<div ng-show="shortlinks.length" class="well row">
 				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 shortlinks-select"
 					ng-repeat="link in shortlinks" ng-hide="$index == 0"
-					ng-class="{loggedin: link.enabled, loggedout: !link.enabled}">
+					ng-class="checkLogin(link.id)">
 					<input id="{{ link.id }}_enabled" name="{{ link.id }}_enabled"
 						ng-model="link.enabled" type="checkbox"> <label
 						for="{{ link.id }}_enabled">{{ link.service }}</label> <span
@@ -29,16 +29,15 @@
 					ng-hide="hideDetails"></span><span
 					class="glyphicon glyphicon-expand" ng-show="hideDetails"></span> <strong>Details</strong>
 			</div>
-			<div class="row" ng-hide="hideDetails"
-				class="animate-hide animate-show">
+			<div ng-hide="hideDetails" class="row animate-show">
 				<div class="col-md-6">
 					<div ng-show="displayDetails('showtitle')"
-						class="col-md-12 animate-show form-group">
+						class="col-md-12 form-group">
 						<label for="title" class="control-label">Title:</label> <input
 							id="title" class="form-control" ng-model="linkTitle">
 					</div>
 					<div ng-show="displayDetails('showdescription')"
-						class="col-md-12 animate-show form-group">
+						class="col-md-12 form-group">
 						<label for="description" class="control-label">Description:</label>
 						<textarea id="description" class="form-control"
 							ng-model="linkDesc" rows="10"></textarea>
@@ -46,13 +45,13 @@
 				</div>
 				<div class="col-md-6">
 					<div ng-show="displayDetails('showimage')"
-						class="col-md-12 animate-show form-group">
+						class="col-md-12 form-group">
 						<label for="image" class="control-label">Image:</label> <input
 							id="image" class="form-control" ng-model="linkImage" type="url"
 							placeholder="http://placekitten.com/g/320/240">
 					</div>
 					<div ng-show="displayDetails('showimage')"
-						class="col-md-12 animate-show form-group">
+						class="col-md-12 form-group">
 						<img ng-src="{{linkImage | placekitten}}" height="240" width="320">
 					</div>
 				</div>
