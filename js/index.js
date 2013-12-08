@@ -16,3 +16,7 @@ $(document).ready(function() {
     });
   });
 });
+
+function updateViewExternal(){
+	angular.element(document.getElementById("linkShorten")).scope().$apply();
+}
