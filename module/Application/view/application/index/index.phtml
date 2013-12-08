@@ -7,12 +7,13 @@
 			<div ng-show="shortlinks.length" class="well row">
 				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 shortlinks-select"
 					ng-repeat="link in shortlinks" ng-hide="$index == 0"
-					ng-class="checkLogin(link)">
+					ng-class="[checkLogin(link), link.auth]">
 					<input id="{{ link.id }}_enabled" name="{{ link.id }}_enabled"
-						ng-model="link.enabled" type="checkbox"> <label
-						for="{{ link.id }}_enabled">{{ link.service }}</label> <span
+						ng-model="link.enabled" type="checkbox"
+						ng-disabled="(link.auth=='required')&&(checkLogin(link)=='loggedout')">
+					<label for="{{ link.id }}_enabled">{{ link.service }}</label> <span
 						ng-class="link.serviceicon" class="service-icon {{ link.id }}"
-						ng-click="(checkLogin(link)=='loggedout')?login(link):logout(link)"></span>
+						ng-click="((link.auth != 'none')&&(checkLogin(link)=='loggedout'))?login(link):logout(link)"></span>
 				</div>
 			</div>
 			<label for="origURL" class="control-label">URL to shorten:</label>
