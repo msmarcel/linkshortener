@@ -4,6 +4,10 @@
 
 var fbStatus = 'unknown';
 
+function updateViewExternal(){
+  angular.element(document.getElementById("linkShorten")).scope().$apply();
+}
+
 $(document).ready(function() {
   $.ajaxSetup({
     cache: true
@@ -19,10 +23,7 @@ $(document).ready(function() {
     });
     FB.Event.subscribe('auth.authResponseChange', function(response) {
       fbStatus = response.status;
+      updateViewExternal();
     });
   });
 });
-
-function updateViewExternal(){
-	angular.element(document.getElementById("linkShorten")).scope().$apply();
-}
