@@ -15,7 +15,7 @@ function LinkShortenerCtrl($scope, $http) {
     'showtitle': false,
     'showimage': false,
     'auth': 'none',
-    'serviceicon' : null
+    'serviceicon': null
   }, {
     'id': 'isgd',
     'enabled': true,
@@ -28,7 +28,7 @@ function LinkShortenerCtrl($scope, $http) {
     'showtitle': false,
     'showimage': false,
     'auth': 'none',
-    'serviceicon' : null
+    'serviceicon': null
   }, {
     'id': 'facebook',
     'enabled': true,
@@ -41,7 +41,7 @@ function LinkShortenerCtrl($scope, $http) {
     'showtitle': true,
     'showimage': true,
     'auth': 'required',
-    'serviceicon' : "brandico-facebook-rect"
+    'serviceicon': "brandico-facebook-rect"
   }, {
     'id': 'linkedin',
     'enabled': true,
@@ -92,6 +92,17 @@ function LinkShortenerCtrl($scope, $http) {
       if(fbStatus == 'connected') {
         return 'loggedin';
       }
+    } else if(service.type == 'get') {
+      if(!service.authstatus) {
+        $http.get(service.authlink + '/check').success(function(data, status) {
+          if(data) {
+            service.authstatus = data.status;
+            updateViewExternal();
+          }
+        });
+        service.authstatus = 'loggedout';
+      }
+      return service.authstatus;
     }
     return 'loggedout';
   };
@@ -104,6 +115,8 @@ function LinkShortenerCtrl($scope, $http) {
       IN.User.authorize(updateViewExternal);
     } else if(service.type == 'fbapi') {
       FB.login();
+    } else if(service.type == 'get') {
+      window.location = service.authlink;
     }
   };
 
@@ -115,9 +128,11 @@ function LinkShortenerCtrl($scope, $http) {
       IN.User.logout(updateViewExternal);
     } else if(service.type == 'fbapi') {
       FB.logout();
+    } else if(service.type == 'get') {
+      window.location = service.authlink + '/logout';
     }
   };
-  
+
   $scope.getLink = function(service) {
     if(service.enabled) {
       if(!service.type) {
@@ -161,9 +176,9 @@ function LinkShortenerCtrl($scope, $http) {
             'code': 'anyone'
           }
         })).result(function(result) {
-          
+
         }).error(function(error) {
-          
+
         });
       }
     } else {

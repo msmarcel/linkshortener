@@ -22,6 +22,14 @@ class IndexController extends AbstractActionController
 
     public function servicesAction()
     {
+        $uri = $this->getRequest()->getUri();
+        $baseUri = $uri->getScheme() . '://' . $uri->getHost();
+        if ($uri->getScheme() == 'http' && $uri->getPort() != 80) {
+            $baseUri .= ':' . $uri->getPort();
+        } elseif ($uri->getScheme() == 'https' && $uri->getPort() != 443) {
+            $baseUri .= ':' . $uri->getPort();
+        }
+        
         return new JsonModel(array(
             array(
                 'id' => 'google',
@@ -35,6 +43,7 @@ class IndexController extends AbstractActionController
                 'showtitle' => false,
                 'showimage' => false,
                 'auth' => 'allowed',
+                'authlink' => $baseUri . $this->url()->fromRoute('google/auth'),
                 'serviceicon' => "brandico-googleplus-rect"
             ),
             array(
@@ -49,6 +58,7 @@ class IndexController extends AbstractActionController
                 'showtitle' => false,
                 'showimage' => false,
                 'auth' => 'required',
+                'authlink' => $baseUri . $this->url()->fromRoute('bitly/auth'),
                 'serviceicon' => array(
                     "glyphicon",
                     "glyphicon-user"

@@ -50,12 +50,30 @@ return array(
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
+                            'check' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'complete',
+                                    'defaults' => array(
+                                        'action' => 'auth-check'
+                                    )
+                                )
+                            ),
                             'complete' => array(
                                 'type' => 'Segment',
                                 'options' => array(
                                     'route' => 'complete',
                                     'defaults' => array(
                                         'action' => 'complete'
+                                    )
+                                )
+                            ),
+                            'logout' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'complete',
+                                    'defaults' => array(
+                                        'action' => 'logout'
                                     )
                                 )
                             )
@@ -84,12 +102,30 @@ return array(
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
+                            'check' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'complete',
+                                    'defaults' => array(
+                                        'action' => 'auth-check'
+                                    )
+                                )
+                            ),
                             'complete' => array(
                                 'type' => 'Segment',
                                 'options' => array(
                                     'route' => 'complete',
                                     'defaults' => array(
                                         'action' => 'complete'
+                                    )
+                                )
+                            ),
+                            'logout' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'complete',
+                                    'defaults' => array(
+                                        'action' => 'logout'
                                     )
                                 )
                             )
