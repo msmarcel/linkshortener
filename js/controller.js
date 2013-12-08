@@ -82,9 +82,11 @@ function LinkShortenerCtrl($scope, $http) {
 
   $scope.checkLogin = function(id) {
     if(id == 'linkedin') {
-      return IN.User.isAuthorized();
+      if(IN.User.isAuthorized()) {
+        return 'loggedin';
+      }
     }
-    return false;
+    return 'loggedout';
   };
   
   $scope.getLink = function(service) {
