@@ -80,33 +80,41 @@ function LinkShortenerCtrl($scope, $http) {
     return false;
   };
 
-  $scope.checkLogin = function(id) {
-    if(id == 'linkedin') {
+  $scope.checkLogin = function(service) {
+    if(service.type == 'liapi') {
       if(!IN.User) {
         return 'loggedout';
       }
       if(IN.User.isAuthorized()) {
         return 'loggedin';
       }
+    } else if(service.type == 'fbapi') {
+      if(fbStatus == 'connected') {
+        return 'loggedin';
+      }
     }
     return 'loggedout';
   };
 
-  $scope.login = function(id) {
-    if(id == 'linkedin') {
+  $scope.login = function(service) {
+    if(service.type == 'liapi') {
       if(!IN.User) {
         return;
       }
       IN.User.authorize(updateViewExternal);
+    } else if(service.type == 'fbapi') {
+      FB.login();
     }
   };
 
-  $scope.logout = function(id) {
-    if(id == 'linkedin') {
+  $scope.logout = function(service) {
+    if(service.type == 'liapi') {
       if(!IN.User) {
         return;
       }
       IN.User.logout(updateViewExternal);
+    } else if(service.type == 'fbapi') {
+      FB.logout();
     }
   };
   

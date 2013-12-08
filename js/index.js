@@ -2,6 +2,8 @@
  * 
  */
 
+var fbStatus = 'unknown';
+
 $(document).ready(function() {
   $.ajaxSetup({
     cache: true
@@ -12,7 +14,11 @@ $(document).ready(function() {
     cache: true
   }).done(function() {
     FB.init({
-      appId: '181808688690091'
+      appId: '181808688690091',
+      status: true
+    });
+    FB.Event.subscribe('auth.authResponseChange', function(response) {
+      fbStatus = response.status;
     });
   });
 });
