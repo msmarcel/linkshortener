@@ -107,6 +107,22 @@ function LinkShortenerCtrl($scope, $http) {
             service.authlink = 'javascript:FB.login();';
           }
         });
+      } else if(service.type == 'liapi') {
+        IN.API.Raw('http://api.linkedin.com/v1/people/~/shares').method('POST').body(JSON.stringify({
+          'content': {
+            'title': $scope.linkTitle,
+            'description': $scope.linkDesc,
+            'submitted-url': $scope.linkUrl,
+            'submitted-image-url': $scope.linkImage
+          },
+          'visibility': {
+            'code': 'anyone'
+          }
+        })).result(function(result) {
+          
+        }).error(function(error) {
+          
+        });
       }
     } else {
       service.shorturl = null;
