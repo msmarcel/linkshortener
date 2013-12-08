@@ -65,14 +65,10 @@
 				ng-class-odd="odd" ng-show="link.shorturl || link.authlink">
 				<label for="shortlink-{{ link.id }}" class="control-label col-md-3">{{
 					link.service }}</label>
-				<p id="shortlink-{{ link.id }}" class="form-control-static col-md-7">
+				<p id="shortlink-{{ link.id }}" class="form-control-static col-md-9">
 					<a ng-show="link.success" href="{{ link.shorturl }}">{{
 						link.shorturl }}</a> <span ng-hide="link.success">{{ link.shorturl
 						}}</span>
-				</p>
-				<p id="authlink-{{ link.id }}" class="form-control-static col-md-2"
-					ng-show="link.authlink">
-					<a href="{{ link.authlink }}" class="btn btn-default">Login</a>
 				</p>
 			</div>
 		</fieldset>
