@@ -48,7 +48,7 @@ class IndexController extends AbstractActionController
             ),
             array(
                 'id' => 'bitly',
-                'enabled' => true,
+                'enabled' => false,
                 'service' => 'Bitly (bit.ly)',
                 'type' => 'get',
                 'api' => $this->url()->fromRoute('bitly') . '?url=',

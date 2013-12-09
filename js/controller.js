@@ -31,7 +31,7 @@ function LinkShortenerCtrl($scope, $http) {
     'serviceicon': null
   }, {
     'id': 'facebook',
-    'enabled': true,
+    'enabled': false,
     'service': 'Facebook',
     'type': 'fbapi',
     'api': null,
@@ -44,7 +44,7 @@ function LinkShortenerCtrl($scope, $http) {
     'serviceicon': "brandico-facebook-rect"
   }, {
     'id': 'linkedin',
-    'enabled': true,
+    'enabled': false,
     'service': 'LinkedIn',
     'type': 'liapi',
     'api': null,

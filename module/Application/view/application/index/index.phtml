@@ -1,5 +1,6 @@
 <div class="col-md-8 col-md-offset-2">
-	<h1>Link Shortener</h1>
+	<h1>socialsaur.us</h1>
+	<div class="help-block">Socialsaurus is a link shortener that creates short URLs for Facebook, Twitter, LinkedIn, and Google+ with their branded short links. Socialsaurus also allows you to customize the title, description, and image of your shortened URL to truly personalize the share link experience. Create your on.fb.me, t.co, lnkd.in, and goo.gl custom URLs:</div>
 	<form role="form" class="form-horizontal"
 		ng-controller="LinkShortenerCtrl"
 		ng-submit="hideDetails = true; submit();" id="linkShorten">
@@ -29,7 +30,7 @@
 				ng-show="displayDetails('showtitle')||displayDetails('showdescription')||displayDetails('showimage')">
 				<span class="glyphicon glyphicon-collapse-down"
 					ng-hide="hideDetails"></span><span
-					class="glyphicon glyphicon-expand" ng-show="hideDetails"></span> <strong>Details</strong>
+					class="glyphicon glyphicon-expand" ng-show="hideDetails"></span> <strong>Details <span class="" title="Customize the title, description, and share image with the following optional fields. Otherwise, those fields will be populated by the meta tags from URL.">[?]</span></strong>
 			</div>
 			<div ng-hide="hideDetails" class="row animate-show">
 				<div class="col-md-6">
