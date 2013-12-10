@@ -70,7 +70,7 @@
 				<label for="shortlink-{{ link.id }}" class="control-label col-md-3">{{
 					link.service }}</label>
 				<p id="shortlink-{{ link.id }}" class="form-control-static col-md-9">
-					<a ng-show="link.success" href="{{ link.shorturl }}">{{
+					<a ng-show="link.success" target="_blank" href="{{ link.shorturl }}">{{
 						link.shorturl }}</a> <span ng-hide="link.success">{{ link.shorturl
 						}}</span>
 				</p>

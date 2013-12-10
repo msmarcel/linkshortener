@@ -133,6 +133,58 @@ return array(
                     )
                 )
             ),
+            'twitter' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/twitter[/]',
+                    'defaults' => array(
+                        'controller' => 'twitter',
+                        'action' => 'index'
+                    )
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'auth' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => 'auth[/]',
+                            'defaults' => array(
+                                'action' => 'auth'
+                            )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'check' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'check',
+                                    'defaults' => array(
+                                        'action' => 'auth-check'
+                                    )
+                                )
+                            ),
+                            'complete' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'complete',
+                                    'defaults' => array(
+                                        'action' => 'complete'
+                                    )
+                                )
+                            ),
+                            'logout' => array(
+                                'type' => 'Segment',
+                                'options' => array(
+                                    'route' => 'logout',
+                                    'defaults' => array(
+                                        'action' => 'logout'
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -186,7 +238,8 @@ return array(
         'invokables' => array(
             'index' => 'Application\Controller\IndexController',
             'google' => 'Application\Controller\GoogleController',
-            'bitly' => 'Application\Controller\BitlyController'
+            'bitly' => 'Application\Controller\BitlyController',
+            'twitter' => 'Application\Controller\TwitterController'
         )
     ),
     'view_manager' => array(

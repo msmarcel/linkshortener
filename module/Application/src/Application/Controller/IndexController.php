@@ -63,6 +63,21 @@ class IndexController extends AbstractActionController
                     "glyphicon",
                     "glyphicon-user"
                 )
+            ),
+            array(
+                'id' => 'twitter',
+                'enabled' => false,
+                'service' => 'Twitter (t.co)',
+                'type' => 'get',
+                'api' => $this->url()->fromRoute('twitter') . '?url=',
+                'success' => true,
+                'shortlink' => null,
+                'showdescription' => false,
+                'showtitle' => false,
+                'showimage' => true,
+                'auth' => 'required',
+                'authlink' => $baseUri . $this->url()->fromRoute('twitter/auth'),
+                'serviceicon' => "brandico-twitter-bird"
             )
         ));
     }
