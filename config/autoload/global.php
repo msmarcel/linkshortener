@@ -21,8 +21,8 @@ return array(
         'twitter' => array(
             'client_id' => '3XQRpIgpSm7XtyFtPC7fmQ',
             'client_secret' => 'QJyUf4CFVsw0dZx9tAJWSi6WPGYOTNBiKd8CHqJtIc',
-            'authorization_url' => 'https://api.twitter.com/oauth/authorize',
-            'access_token_url' => 'https://api.twitter.com/oauth/access_token'
+            'authorization_url' => 'https://api.twitter.com/oauth2/authorize',
+            'access_token_url' => 'https://api.twitter.com/oauth2/token'
         ),
         'google' => array(
             'client_id' => '116155492975-jiimc1pnbn8rutaif71tb9bf0udj7qn0.apps.googleusercontent.com',

@@ -85,7 +85,7 @@ abstract class AbstractServiceController extends AbstractActionController
     public function authAction()
     {
         $this->init();
-        
+       
         return $this->redirect()->toUrl($this->client->getAuthorizationRequestUrl());
     }
 
