@@ -65,6 +65,15 @@ class TwitterController extends AbstractServiceController
             $config = $this->getServiceLocator()->get('Config');
             $client = $this->session->accessToken->getHttpClient($config['link_services'][$this->name]);
             
+            $curl = new Curl();
+            $curl->setOptions(array(
+                'curloptions' => array(
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_SSL_VERIFYPEER => false
+                )
+            ));
+            $client->setAdapter($curl);
+            
             $client->setUri('https://api.twitter.com/1.1/statuses/update.json');
             $client->setMethod(HttpRequest::METHOD_POST);
             $client->setParameterPost(array('status' => $url));
@@ -72,21 +81,22 @@ class TwitterController extends AbstractServiceController
             $response = $client->send();
             
             $result = $response->getBody();
+            error_log($result);
             $data = json_decode($result, true);
             
-            if (array_key_exists('text', $data['data'])) {
+            if (array_key_exists('text', $data)) {
                 return array_merge(array(
                     'success' => true,
                     'needauth' => false,
                     'origurl' => $url,
-                    'shorturl' => $data['data']['text']
+                    'shorturl' => $data['text']
                 ), $data);
             } else {
                 return array_merge(array(
                     'success' => false,
                     'needauth' => false,
                     'origurl' => $url,
-                    'shorturl' => $data['status_txt']
+                    'shorturl' => ''
                 ), $data);
             }
         }
