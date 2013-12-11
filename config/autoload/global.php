@@ -21,7 +21,7 @@ return array(
         'twitter' => array(
             'consumerKey' => '3XQRpIgpSm7XtyFtPC7fmQ',
             'consumerSecret' => 'QJyUf4CFVsw0dZx9tAJWSi6WPGYOTNBiKd8CHqJtIc',
-            'siteUrl' => 'http://twitter.com/oauth'
+            'siteUrl' => 'https://api.twitter.com/oauth'
         ),
         'google' => array(
             'client_id' => '116155492975-jiimc1pnbn8rutaif71tb9bf0udj7qn0.apps.googleusercontent.com',
