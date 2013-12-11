@@ -95,6 +95,7 @@ function LinkShortenerCtrl($scope, $http) {
   };
 
   $scope.login = function(service) {
+  	service.enabled = false;
     if(service.type == 'liapi') {
       if(!IN.User) {
         return;
