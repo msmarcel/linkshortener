@@ -172,7 +172,7 @@ function LinkShortenerCtrl($scope, $http) {
           }
         });
       } else if(service.type == 'liapi') {
-        IN.API.Raw('http://api.linkedin.com/v1/people/~/shares').method('POST').body(JSON.stringify({
+        IN.API.Raw('people/~/shares').method('POST').body(JSON.stringify({
           'content': {
             'title': $scope.linkTitle,
             'description': $scope.linkDesc,
