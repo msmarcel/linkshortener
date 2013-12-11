@@ -19,10 +19,9 @@ return array(
             'access_token_url' => 'https://api-ssl.bitly.com/oauth/access_token'
         ),
         'twitter' => array(
-            'client_id' => '3XQRpIgpSm7XtyFtPC7fmQ',
-            'client_secret' => 'QJyUf4CFVsw0dZx9tAJWSi6WPGYOTNBiKd8CHqJtIc',
-            'authorization_url' => 'https://api.twitter.com/oauth2/authorize',
-            'access_token_url' => 'https://api.twitter.com/oauth2/token'
+            'consumerKey' => '3XQRpIgpSm7XtyFtPC7fmQ',
+            'consumerSecret' => 'QJyUf4CFVsw0dZx9tAJWSi6WPGYOTNBiKd8CHqJtIc',
+            'siteUrl' => 'http://twitter.com/oauth'
         ),
         'google' => array(
             'client_id' => '116155492975-jiimc1pnbn8rutaif71tb9bf0udj7qn0.apps.googleusercontent.com',
