@@ -61,20 +61,24 @@ class TwitterController extends AbstractServiceController
     protected function makeApiCall($url)
     {
         if (isset($this->session->accessToken)) {
-            $requestParams = array(
-                'access_token' => $this->session->accessToken->getAccessToken(),
-                'longUrl' => $url
-            );
+            $client = $this->session->accessToken->getHttpClient(array());
             
-            $response = $this->client->get('https://api.twitter.com/', $requestParams);
-            $data = json_decode($response->getBody(), true);
+            $client->setUri('https://api.twitter.com/1.1/statuses/update.json');
+            $client->setMethod('POST');
+            $client->setParameterPost(array('status' => $url));
             
-            if (array_key_exists('url', $data['data'])) {
+            $response = $client->request();
+            
+            $result = $response->getBody();
+            error_log($result);
+            $data = json_decode($result, true);
+            
+            if (array_key_exists('text', $data['data'])) {
                 return array_merge(array(
                     'success' => true,
                     'needauth' => false,
                     'origurl' => $url,
-                    'shorturl' => $data['data']['url']
+                    'shorturl' => $data['data']['text']
                 ), $data);
             } else {
                 return array_merge(array(
@@ -108,8 +112,9 @@ class TwitterController extends AbstractServiceController
     {
         $this->init();
         
-        $this->session->accessToken = unserialize($_SESSION['TWITTER_ACCESS_TOKEN']);
-        unset($_SESSION['TWITTER_ACCESS_TOKEN']);
+        $this->session->accessToken = $this->client->getAccessToken($_GET, unserialize($_SESSION['TWITTER_REQUEST_TOKEN']));
+
+        unset($_SESSION['TWITTER_REQUEST_TOKEN']);
         
         return $this->redirect()->toRoute('home');
     }
