@@ -166,6 +166,7 @@ function LinkShortenerCtrl($scope, $http) {
                 FB.api('/' + response.id, function(post) {
                   console.log(post);
                   if(post && post.link) {
+                    service.success = true;
                     service.shorturl = post.link;
                   }
                 });
