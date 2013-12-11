@@ -163,13 +163,12 @@ function LinkShortenerCtrl($scope, $http) {
               picture: $scope.linkImage
             }, function(response) {
               if(response && response.id) {
-                setTimeout(function() {
-                  FB.api('/' + response.id, function(post) {
-                    if(post && post.link) {
-                      service.shorturl = post.link;
-                    }
-                  });
-                }, 3000);
+                FB.api('/' + response.id, function(post) {
+                  console.log(post);
+                  if(post && post.link) {
+                    service.shorturl = post.link;
+                  }
+                });
               }
             });
           }
