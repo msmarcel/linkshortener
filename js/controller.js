@@ -169,7 +169,7 @@ function LinkShortenerCtrl($scope, $http) {
                       service.shorturl = post.link;
                     }
                   });
-                }, 1000);
+                }, 3000);
               }
             });
           }
