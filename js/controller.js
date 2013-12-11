@@ -115,7 +115,7 @@ function LinkShortenerCtrl($scope, $http) {
       IN.User.authorize();
     } else if(service.type == 'fbapi') {
       FB.login(updateViewExternal, {
-        scope: 'publish_actions'
+        scope: 'publish_actions,read_stream'
       });
     } else if(service.type == 'get') {
       window.location = service.authlink;
