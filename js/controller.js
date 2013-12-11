@@ -156,7 +156,7 @@ function LinkShortenerCtrl($scope, $http) {
       } else if(service.type == 'fbapi') {
         FB.getLoginStatus(function(response) {
           if(response.status == 'connected') {
-            FB.api('/me/feed', 'post', {
+            FB.api('/me/links', 'post', {
               link: $scope.linkURL,
               name: $scope.linkTitle,
               description: $scope.linkDesc,
@@ -169,6 +169,7 @@ function LinkShortenerCtrl($scope, $http) {
                   if(post && post.link) {
                     service.success = true;
                     service.shorturl = post.link;
+                    updateViewExternal();
                   }
                 });
               }
