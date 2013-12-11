@@ -42,19 +42,6 @@ function LinkShortenerCtrl($scope, $http) {
     'showimage': true,
     'auth': 'required',
     'serviceicon': "brandico-facebook-rect"
-  }, {
-    'id': 'linkedin',
-    'enabled': false,
-    'service': 'LinkedIn',
-    'type': 'liapi',
-    'api': null,
-    'success': true,
-    'shorturl': null,
-    'showdescription': true,
-    'showtitle': true,
-    'showimage': false,
-    'auth': 'required',
-    'serviceicon': "brandico-linkedin-rect"
   }];
   $http.get('/services.json').success(function(data, status) {
     for(var loop = 0; loop < data.length; loop++) {
