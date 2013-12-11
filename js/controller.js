@@ -151,11 +151,6 @@ function LinkShortenerCtrl($scope, $http) {
           if(data) {
             service.success = data.success;
             service.shorturl = data.shorturl;
-            if(data.needauth && data.authlink) {
-              service.authlink = data.authlink;
-            } else {
-              service.authlink = null;
-            }
           }
         });
       } else if(service.type == 'fbapi') {
@@ -175,8 +170,6 @@ function LinkShortenerCtrl($scope, $http) {
                 });
               }
             });
-          } else if(response.status == 'not_authorized') {
-            service.authlink = 'javascript:FB.login();';
           }
         });
       } else if(service.type == 'liapi') {

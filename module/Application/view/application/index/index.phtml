@@ -66,7 +66,7 @@
 			<legend>Shortened Links</legend>
 			<div ng-repeat="link in shortlinks"
 				class="row col-md-12 animate-show" ng-class-odd="odd"
-				ng-show="link.shorturl || link.authlink">
+				ng-show="link.shorturl">
 				<label for="shortlink-{{ link.id }}" class="control-label col-md-3">{{
 					link.service }}</label>
 				<p id="shortlink-{{ link.id }}" class="form-control-static col-md-9">
