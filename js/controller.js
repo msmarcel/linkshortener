@@ -162,6 +162,7 @@ function LinkShortenerCtrl($scope, $http) {
               description: $scope.linkDesc,
               picture: $scope.linkImage
             }, function(response) {
+              console.log(response);
               if(response && response.id) {
                 FB.api('/' + response.id, function(post) {
                   console.log(post);
