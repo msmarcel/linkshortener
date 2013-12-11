@@ -112,7 +112,7 @@ function LinkShortenerCtrl($scope, $http) {
       if(!IN.User) {
         return;
       }
-      IN.User.authorize(updateViewExternal);
+      IN.User.authorize();
     } else if(service.type == 'fbapi') {
       FB.login(updateViewExternal, {
         scope: 'publish_actions'
@@ -163,30 +163,39 @@ function LinkShortenerCtrl($scope, $http) {
               picture: $scope.linkImage
             }, function(response) {
               if(response && response.id) {
-                FB.api('/' + response.id, function(post) {
-                  if(post && post.link) {
-                    service.shorturl = post.link;
-                  }
-                });
+                setTimeout(function() {
+                  FB.api('/' + response.id, function(post) {
+                    if(post && post.link) {
+                      service.shorturl = post.link;
+                    }
+                  });
+                }, 1000);
               }
             });
           }
         });
       } else if(service.type == 'liapi') {
-        IN.API.Raw('people/~/shares?format=json').method('POST').body(JSON.stringify({
+        var post = {
           'content': {
-            'title': $scope.linkTitle,
-            'description': $scope.linkDesc,
             'submitted-url': $scope.linkURL,
-            'submitted-image-url': $scope.linkImage
           },
           'visibility': {
             'code': 'anyone'
           }
-        })).result(function(result) {
-
+        };
+        if($scope.linkTitle) {
+          post['content']['title'] = $scope.linkTitle;
+        }
+        if($scope.linkDesc) {
+          post['content']['description'] = $scope.linkDesc;
+        }
+        if($scope.linkImage) {
+          post['content']['submitted-image-url'] = $scope.linkImage;
+        }
+        IN.API.Raw('people/~/shares').method('POST').body(JSON.stringify(post)).result(function(result) {
+          console.log(result);
         }).error(function(error) {
-
+          console.log(error);
         });
       }
     } else {

@@ -26,4 +26,18 @@ $(document).ready(function() {
       updateViewExternal();
     });
   });
+  $.ajax({
+    url: '//platform.linkedin.com/in.js?async=true',
+    dataType: 'script',
+    cache: true
+  }).done(function() {
+    IN.init({
+      api_key: '75rsw6wrww3h5k',
+      authorize: true,
+      onLoad: 'updateViewExternal',
+      scope: 'rw_nus'
+    });
+    IN.Event.on(IN, 'auth', updateViewExternal);
+    IN.Event.on(IN, 'logout', updateViewExternal);
+  });
 });
