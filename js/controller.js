@@ -159,7 +159,14 @@ function LinkShortenerCtrl($scope, $http) {
       } else if(service.type == 'fbapi') {
         FB.getLoginStatus(function(response) {
           if(response.status == 'connected') {
-            // FB.api();
+            FB.api('/me/feed', 'post', {
+              link: $scope.linkURL,
+              name: $scope.linkTitle,
+              description: $scope.linkDesc,
+              picture: $scope.linkImage
+            }, function(response) {
+              
+            });
           } else if(response.status == 'not_authorized') {
             service.authlink = 'javascript:FB.login();';
           }
@@ -169,7 +176,7 @@ function LinkShortenerCtrl($scope, $http) {
           'content': {
             'title': $scope.linkTitle,
             'description': $scope.linkDesc,
-            'submitted-url': $scope.linkUrl,
+            'submitted-url': $scope.linkURL,
             'submitted-image-url': $scope.linkImage
           },
           'visibility': {

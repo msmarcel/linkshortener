@@ -15,6 +15,7 @@ use Zend\Session\Container;
 use ZendService\Api\Api;
 use ZendOAuth\Consumer;
 use Zend\Http\Client as HttpClient;
+use Zend\Http\Request as HttpRequest;
 use Zend\Http\Client\Adapter\Curl;
 
 class TwitterController extends AbstractServiceController
@@ -61,16 +62,16 @@ class TwitterController extends AbstractServiceController
     protected function makeApiCall($url)
     {
         if (isset($this->session->accessToken)) {
-            $client = $this->session->accessToken->getHttpClient(array());
+            $config = $this->getServiceLocator()->get('Config');
+            $client = $this->session->accessToken->getHttpClient($config['link_services'][$this->name]);
             
             $client->setUri('https://api.twitter.com/1.1/statuses/update.json');
-            $client->setMethod('POST');
+            $client->setMethod(HttpRequest::METHOD_POST);
             $client->setParameterPost(array('status' => $url));
             
-            $response = $client->request();
+            $response = $client->send();
             
             $result = $response->getBody();
-            error_log($result);
             $data = json_decode($result, true);
             
             if (array_key_exists('text', $data['data'])) {
