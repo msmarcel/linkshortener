@@ -59,7 +59,7 @@ class TwitterController extends AbstractServiceController
         $this->session = new Container($this->name);
     }
 
-    protected function makeApiCall($url)
+    protected function makeApiCall($url, $title, $description, $image)
     {
         if (isset($this->session->accessToken)) {
             $config = $this->getServiceLocator()->get('Config');
@@ -76,7 +76,9 @@ class TwitterController extends AbstractServiceController
             
             $client->setUri('https://api.twitter.com/1.1/statuses/update.json');
             $client->setMethod(HttpRequest::METHOD_POST);
-            $client->setParameterPost(array('status' => $url));
+            $client->setParameterPost(array(
+                'status' => $url
+            ));
             
             $response = $client->send();
             
@@ -85,19 +87,21 @@ class TwitterController extends AbstractServiceController
             $data = json_decode($result, true);
             
             if (array_key_exists('text', $data)) {
-                return array_merge(array(
+                return array(
                     'success' => true,
                     'needauth' => false,
                     'origurl' => $url,
-                    'shorturl' => $data['text']
-                ), $data);
+                    'shorturl' => $data['text'],
+                    'data' => $data
+                );
             } else {
-                return array_merge(array(
+                return array(
                     'success' => false,
                     'needauth' => false,
                     'origurl' => $url,
-                    'shorturl' => ''
-                ), $data);
+                    'shorturl' => '',
+                    'data' => $data
+                );
             }
         }
         
@@ -124,7 +128,7 @@ class TwitterController extends AbstractServiceController
         $this->init();
         
         $this->session->accessToken = $this->client->getAccessToken($_GET, unserialize($_SESSION['TWITTER_REQUEST_TOKEN']));
-
+        
         unset($_SESSION['TWITTER_REQUEST_TOKEN']);
         
         return $this->redirect()->toRoute('home');
