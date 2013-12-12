@@ -174,7 +174,7 @@ function LinkShortenerCtrl($scope, $http) {
 						          method: 'GET',
 						          url: bitlyapi,
 						          params: {
-						            'url': encodeURI(data.shorturl),
+						            'url': encodeURI(sendURL),
 						            'title': encodeURI($scope.linkTitle),
 						            'description': encodeURI($scope.linkDesc),
 						            'image': encodeURI($scope.linkImage)
@@ -182,7 +182,7 @@ function LinkShortenerCtrl($scope, $http) {
 						        }).success(function(data, status) {
 						          if(data) {
 						            service.success = data.success;
-						            service.shorturl = sendURL;
+						            service.shorturl = data.shorturl;
 						          }
 						        });
                     
