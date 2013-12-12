@@ -97,10 +97,7 @@ function LinkShortenerCtrl($scope, $http) {
   $scope.login = function(service) {
   	service.enabled = false;
     if(service.type == 'liapi') {
-      if(!IN.User) {
-        return;
-      }
-      IN.User.authorize();
+      window.location = service.authlink;
     } else if(service.type == 'fbapi') {
       FB.login(updateViewExternal, {
         scope: 'publish_actions,read_stream'
@@ -112,10 +109,7 @@ function LinkShortenerCtrl($scope, $http) {
 
   $scope.logout = function(service) {
     if(service.type == 'liapi') {
-      if(!IN.User) {
-        return;
-      }
-      IN.User.logout(updateViewExternal);
+      window.location = service.authlink + 'logout';
     } else if(service.type == 'fbapi') {
       FB.logout();
     } else if(service.type == 'get') {
