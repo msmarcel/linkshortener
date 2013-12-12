@@ -174,27 +174,37 @@ function LinkShortenerCtrl($scope, $http) {
           }
         });
       } else if(service.type == 'liapi') {
-        var post = {
-          'content': {
-            'submitted-url': $scope.linkURL,
-          },
-          'visibility': {
-            'code': 'anyone'
+        $http({
+          method: 'GET',
+          url: service.api,
+          params: {
+            'url': encodeURI($scope.linkURL),
+            'title': encodeURI($scope.linkTitle),
+            'description': encodeURI($scope.linkDesc),
+            'image': encodeURI($scope.linkImage)
           }
-        };
-        if($scope.linkTitle) {
-          post['content']['title'] = $scope.linkTitle;
-        }
-        if($scope.linkDesc) {
-          post['content']['description'] = $scope.linkDesc;
-        }
-        if($scope.linkImage) {
-          post['content']['submitted-image-url'] = $scope.linkImage;
-        }
-        IN.API.Raw('people/~/shares').method('POST').body(JSON.stringify(post)).result(function(result) {
-          console.log(result);
-        }).error(function(error) {
-          console.log(error);
+        }).success(function(data, status) {
+        	var bitlyapi = null;
+        	$.each($scope.shortlinks, function(){
+        		if (this.id == "bitly") bitlyapi = this.api;
+        	});
+          if(data) {            
+            $http({
+		          method: 'GET',
+		          url: bitlyapi,
+		          params: {
+		            'url': encodeURI(data.shorturl),
+		            'title': encodeURI($scope.linkTitle),
+		            'description': encodeURI($scope.linkDesc),
+		            'image': encodeURI($scope.linkImage)
+		          }
+		        }).success(function(data, status) {
+		          if(data) {
+		            service.success = data.success;
+		            service.shorturl = data.shorturl;
+		          }
+		        });
+          }
         });
       }
     } else {
@@ -204,6 +214,9 @@ function LinkShortenerCtrl($scope, $http) {
 
   $scope.submit = function() {
     for(var loop = 0; loop < $scope.shortlinks.length; loop++) {
+    	if ($("input[name=" + $scope.shortlinks[loop].id + "_enabled]").prop("checked")) {
+    		$scope.shortlinks[loop].enabled = true;
+    	}
       $scope.getLink($scope.shortlinks[loop]);
     }
   };
