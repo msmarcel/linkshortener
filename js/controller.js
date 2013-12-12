@@ -3,6 +3,8 @@
 function LinkShortenerCtrl($scope, $http) {
   $scope.linkURL = '';
   $scope.linkImage = "";
+  $scope.linkDesc = "";
+  $scope.linkTitle = "";
   $scope.shortlinks = [{
     'id': 'default',
     'enabled': true,
@@ -163,7 +165,24 @@ function LinkShortenerCtrl($scope, $http) {
                   console.log(post);
                   if(post && post.link) {
                     service.success = true;
-                    service.shorturl = post.link;
+                    var sendURL = "https://www.facebook.com/"+ post.from.id +"/posts/" + post.id;
+                    
+                    $http({
+						          method: 'GET',
+						          url: bitlyapi,
+						          params: {
+						            'url': encodeURI(data.shorturl),
+						            'title': encodeURI($scope.linkTitle),
+						            'description': encodeURI($scope.linkDesc),
+						            'image': encodeURI($scope.linkImage)
+						          }
+						        }).success(function(data, status) {
+						          if(data) {
+						            service.success = data.success;
+						            service.shorturl = sendURL;
+						          }
+						        });
+                    
                     updateViewExternal();
                   }
                 });
