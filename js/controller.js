@@ -69,12 +69,16 @@ function LinkShortenerCtrl($scope, $http) {
 
   $scope.checkLogin = function(service) {
     if(service.type == 'liapi') {
-      if(!IN.User) {
-        return 'loggedout';
+      if(!service.authstatus) {
+        $http.get(service.authlink + 'check').success(function(data, status) {
+          if(data) {
+            service.authstatus = data.status;
+            updateViewExternal();
+          }
+        });
+        service.authstatus = 'loggedout';
       }
-      if(IN.User.isAuthorized()) {
-        return 'loggedin';
-      }
+      return service.authstatus;
     } else if(service.type == 'fbapi') {
       if(fbStatus == 'connected') {
         return 'loggedin';
