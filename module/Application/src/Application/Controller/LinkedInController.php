@@ -52,20 +52,13 @@ class LinkedInController extends AbstractServiceController
             $response = $this->client->post("https://api.linkedin.com/v1/people/~/shares?oauth2_access_token={$token}", null, $requestHeaders, $requestBody);
             $data = json_decode($response->getBody(), true);
             
-            if (array_key_exists('updateKey', $data)) {
-                $key = urlencode($data['updateKey']);
-                $update = $this->client->get("https://api.linkedin.com/v1/people/~/network/updates/key={$key}", array(
-                    'oauth2_access_token' => $token
-                ), $requestHeaders, null);
-                error_log($update);
-                $extraData = json_decode($update->getBody(), true);
+            if (array_key_exists('updateUrl', $data)) {
                 return array(
                     'success' => true,
                     'needauth' => false,
                     'origurl' => $url,
-                    'shorturl' => $data['updateKey'],
-                    'data' => $data,
-                    'extra' => $extraData
+                    'shorturl' => $data['updateUrl'],
+                    'data' => $data
                 );
             } else {
                 return array(
