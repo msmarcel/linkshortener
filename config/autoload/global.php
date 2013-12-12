@@ -41,6 +41,7 @@ return array(
         )
     ),
     'tokens' => array(
-    	'google' => 'AIzaSyD8UTiWwLri3M3xUkmNP6bUoTmv23ElWY8'
+    	'google' => 'AIzaSyD8UTiWwLri3M3xUkmNP6bUoTmv23ElWY8',
+    	'bitly' => '54976fe798b38d5145a1e00af926ffff1a0f2d35'
     )
 );

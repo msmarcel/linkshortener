@@ -57,7 +57,7 @@ class IndexController extends AbstractActionController
                 'showdescription' => false,
                 'showtitle' => false,
                 'showimage' => false,
-                'auth' => 'required',
+                'auth' => 'allowed',
                 'authlink' => $baseUri . $this->url()->fromRoute('bitly/auth'),
                 'serviceicon' => array(
                     "glyphicon",
@@ -83,7 +83,7 @@ class IndexController extends AbstractActionController
                 'id' => 'linkedin',
                 'enabled' => false,
                 'service' => 'LinkedIn',
-                'type' => 'get',
+                'type' => 'liapi',
                 'api' => $this->url()->fromRoute('linkedin'),
                 'success' => true,
                 'shorturl' => null,
