@@ -58,7 +58,7 @@ abstract class AbstractServiceController extends AbstractActionController
         $this->session = new Container($this->name);
     }
 
-    protected function makeApiCall($url)
+    protected function makeApiCall($url, $title, $description, $image)
     {
         throw new Exception('makeApiCall must be defined by subclass!');
     }
@@ -68,7 +68,10 @@ abstract class AbstractServiceController extends AbstractActionController
         $this->init();
         
         $url = $this->params()->fromQuery('url');
-        $response = $this->makeApiCall($url);
+        $title = $this->params()->fromQuery('title');
+        $description = $this->params()->fromQuery('description');
+        $image = $this->params()->fromQuery('image');
+        $response = $this->makeApiCall($url, $title, $description, $image);
         
         if ($response) {
             return new JsonModel($response);

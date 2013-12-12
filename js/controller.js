@@ -135,7 +135,16 @@ function LinkShortenerCtrl($scope, $http) {
           }
         });
       } else if(service.type == 'get') {
-        $http.get(service.api + encodeURI($scope.linkURL)).success(function(data, status) {
+        $http({
+          method: 'GET',
+          url: service.api,
+          params: {
+            'url': encodeURI($scope.linkURL),
+            'title': encodeURI($scope.linkTitle),
+            'description': encodeURI($scope.linkDesc),
+            'image': encodeURI($scope.linkImage)
+          }
+        }).success(function(data, status) {
           if(data) {
             service.success = data.success;
             service.shorturl = data.shorturl;

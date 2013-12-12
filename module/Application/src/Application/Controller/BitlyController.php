@@ -21,7 +21,7 @@ class BitlyController extends AbstractServiceController
 
     protected $name = 'bitly';
 
-    protected function makeApiCall($url)
+    protected function makeApiCall($url, $title, $description, $image)
     {
         if (isset($this->session->accessToken)) {
             $requestParams = array(
@@ -33,19 +33,21 @@ class BitlyController extends AbstractServiceController
             $data = json_decode($response->getBody(), true);
             
             if (array_key_exists('url', $data['data'])) {
-                return array_merge(array(
+                return array(
                     'success' => true,
                     'needauth' => false,
                     'origurl' => $url,
-                    'shorturl' => $data['data']['url']
-                ), $data);
+                    'shorturl' => $data['data']['url'],
+                    'data' => $data
+                );
             } else {
-                return array_merge(array(
+                return array(
                     'success' => false,
                     'needauth' => false,
                     'origurl' => $url,
-                    'shorturl' => $data['status_txt']
-                ), $data);
+                    'shorturl' => $data['status_txt'],
+                    'data' => $data
+                );
             }
         }
         

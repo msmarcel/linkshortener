@@ -29,6 +29,15 @@ return array(
             'scope' => 'https://www.googleapis.com/auth/urlshortener',
             'authorization_url' => 'https://accounts.google.com/o/oauth2/auth',
             'access_token_url' => 'https://accounts.google.com/o/oauth2/token'
+        ),
+        'linkedin' => array(
+            'client_id' => '75rsw6wrww3h5k',
+            'client_secret' => 'UQRyprGm4vsW06vc',
+            'scope' => 'rw_nus',
+            'state' => 'linkshortener',
+            'authorization_url' => 'https://www.linkedin.com/uas/oauth2/authorization',
+            'access_token_url' => 'https://api.linkedin.com/uas/oauth2/accessToken',
+            'request_token_url' => 'https://api.linkedin.com/uas/oauth2/requestToken'
         )
     ),
     'tokens' => array(

@@ -18,10 +18,10 @@ use Application\OAuth\HttpClient;
 
 class GoogleController extends AbstractServiceController
 {
-    
+
     protected $name = 'google';
 
-    protected function makeApiCall($url)
+    protected function makeApiCall($url, $title, $description, $image)
     {
         $requestHeaders = array(
             'Content-Type' => 'application/json'
@@ -43,20 +43,22 @@ class GoogleController extends AbstractServiceController
         $data = json_decode($response->getBody(), true);
         
         if (array_key_exists('id', $data)) {
-            return array_merge(array(
+            return array(
                 'success' => true,
                 'needauth' => $needAuth,
                 'authlink' => $this->authUri,
                 'origurl' => $url,
-                'shorturl' => $data['id']
-            ), $data);
+                'shorturl' => $data['id'],
+                'data' => $data
+            );
         }
         
-        return array_merge(array(
+        return array(
             'success' => false,
             'needauth' => $needAuth,
             'authlink' => $this->authUri,
-            'origurl' => $url
-        ), $data);
+            'origurl' => $url,
+            'data' => $data
+        );
     }
 }
