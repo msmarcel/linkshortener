@@ -166,7 +166,10 @@ function LinkShortenerCtrl($scope, $http) {
                   if(post && post.link) {
                     service.success = true;
                     var sendURL = "https://www.facebook.com/"+ post.from.id +"/posts/" + post.id;
-                    
+                    var bitlyapi = null;
+					        	$.each($scope.shortlinks, function(){
+					        		if (this.id == "bitly") bitlyapi = this.api;
+					        	});
                     $http({
 						          method: 'GET',
 						          url: bitlyapi,
